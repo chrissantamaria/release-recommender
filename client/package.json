@@ -1,0 +1,19 @@
+{
+  "name": "release-recommender",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "next dev",
+    "build": "next build && next export"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.1.1",
+    "next": "10.0.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^10.2.0",
+    "babel-plugin-emotion": "^10.0.33"
+  }
+}
