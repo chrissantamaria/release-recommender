@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 const Home = () => {
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState<null | string>(null);
 
   useEffect(() => {
     fetch('/api/hello')
