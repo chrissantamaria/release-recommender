@@ -5,7 +5,6 @@ const Login = () => (
   <Button
     variant="contained"
     color="primary"
-    disableElevation
     onClick={() => {
       window.location.href = '/api/spotify_login';
     }}

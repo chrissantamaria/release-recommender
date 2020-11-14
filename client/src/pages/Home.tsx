@@ -1,26 +1,13 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Button, Typography } from '@material-ui/core';
-
-import useStore from '../store';
+import { Typography } from '@material-ui/core';
 
 const Home = () => {
-  const logout = useStore((state) => state.logout);
   const { data: profileData } = useQuery('/me');
   const { data: playlistData } = useQuery('/me/playlists');
 
   return (
     <>
-      <Typography variant="h3">Release Recommender</Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        disableElevation
-        style={{ marginBottom: '1rem' }}
-        onClick={logout}
-      >
-        Logout
-      </Button>
       {profileData && (
         <div>
           <Typography variant="h4">Profile:</Typography>
