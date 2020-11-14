@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 
 import useSpotifyStore from '@store/spotify';
 
@@ -14,10 +13,6 @@ const Home = () => {
 
   return (
     <>
-      <Head>
-        <title>Release Recommender</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <h1 css={{ color: 'blue' }}>Release Recommender</h1>
       {accessToken ? (
         <>
