@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 import { CssBaseline, useMediaQuery } from '@material-ui/core';
 import {
   createMuiTheme,
@@ -6,19 +6,38 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from '@material-ui/core/styles';
 
+type ColorScheme = {
+  isDarkMode: boolean;
+  toggleColorScheme: () => void;
+};
+
+const ColorSchemeContext = createContext<ColorScheme>({
+  isDarkMode: false,
+  toggleColorScheme: () => {},
+});
+export const useColorScheme = () => useContext(ColorSchemeContext);
+
 type Props = {
   children: React.ReactNode;
 };
 
 const ThemeProvider = ({ children }: Props) => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [isDarkMode, setIsDarkMode] = useState(
+    useMediaQuery('(prefers-color-scheme: dark)', {
+      noSsr: true,
+    })
+  );
+
+  const toggleColorScheme = () => {
+    setIsDarkMode((val) => !val);
+  };
 
   const theme = useMemo(
     () =>
       responsiveFontSizes(
         createMuiTheme({
           palette: {
-            type: prefersDarkMode ? 'dark' : 'light',
+            type: isDarkMode ? 'dark' : 'light',
           },
           props: {
             MuiButton: {
@@ -30,14 +49,16 @@ const ThemeProvider = ({ children }: Props) => {
           },
         })
       ),
-    [prefersDarkMode]
+    [isDarkMode]
   );
 
   return (
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </MuiThemeProvider>
+    <ColorSchemeContext.Provider value={{ isDarkMode, toggleColorScheme }}>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </MuiThemeProvider>
+    </ColorSchemeContext.Provider>
   );
 };
 
