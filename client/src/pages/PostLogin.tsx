@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate } from 'react-router-dom';
 
-import useSpotifyStore from '@store/spotify';
+import useSpotifyStore from '../store/spotify';
 
 const PostLogin = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
   const handlePostLogin = useSpotifyStore((state) => state.handlePostLogin);
 
   useEffect(() => {
@@ -14,8 +14,8 @@ const PostLogin = () => {
       refreshToken: params.get('refresh_token'),
     });
 
-    router.push('/');
-  }, [handlePostLogin, router]);
+    navigate('/');
+  }, [handlePostLogin, navigate]);
 
   return <div />;
 };
