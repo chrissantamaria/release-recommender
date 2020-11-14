@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { addSeconds } from 'date-fns';
 
 import useStore from '../store';
 
