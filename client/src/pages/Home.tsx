@@ -1,7 +1,6 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/react';
-import { Fragment } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
+import { Button, Typography } from '@material-ui/core';
 
 import useStore from '../store';
 
@@ -11,23 +10,30 @@ const Home = () => {
   const { data: playlistData } = useQuery('/me/playlists');
 
   return (
-    <Fragment>
-      <h1 css={{ color: 'blue' }}>Release Recommender</h1>
-      <button onClick={logout}>Logout</button>
-      <br />
+    <>
+      <Typography variant="h3">Release Recommender</Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        disableElevation
+        style={{ marginBottom: '1rem' }}
+        onClick={logout}
+      >
+        Logout
+      </Button>
       {profileData && (
         <div>
-          <h2>Profile:</h2>
+          <Typography variant="h4">Profile:</Typography>
           <pre>{JSON.stringify(profileData, null, 2)}</pre>
         </div>
       )}
       {playlistData && (
         <div>
-          <h2>Playlists:</h2>
+          <Typography variant="h4">Playlists:</Typography>
           <pre>{JSON.stringify(playlistData, null, 2)}</pre>
         </div>
       )}
-    </Fragment>
+    </>
   );
 };
 
