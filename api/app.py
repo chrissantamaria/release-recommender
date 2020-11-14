@@ -5,7 +5,7 @@ from urllib.parse import urlencode
 
 SPOTIFY_AUTH_URL = 'https://accounts.spotify.com/authorize'
 SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token'
-SPOTIFY_REDIRECT_URI = f'{os.environ.get("API_BASE_URL")}/api/spotify_callback'
+SPOTIFY_REDIRECT_URI = f'{os.environ.get("APP_BASE_URL")}/api/spotify_callback'
 
 app = Flask(__name__)
 
