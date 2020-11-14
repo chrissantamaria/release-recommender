@@ -2,6 +2,8 @@
 
 ## Development Usage
 
+Go to the `api` folder and create a new `.env` file based on `.env.example` with values filled.
+
 To run the API locally (accessible from http://localhost:8080):
 
 ```bash

@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
 
-const Home = () => {
-  const [message, setMessage] = useState<null | string>(null);
+import useSpotifyStore from '../store/spotify';
 
-  useEffect(() => {
-    fetch('/api/hello')
-      .then((res) => res.text())
-      .then(setMessage);
-  }, []);
+const Home = () => {
+  const accessToken = useSpotifyStore((state) => state.accessToken);
 
   return (
     <>
@@ -17,7 +13,11 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1 css={{ color: 'blue' }}>Release Recommender</h1>
-      {!message ? <p>Loading...</p> : <p>API response: {message}</p>}
+      {accessToken ? (
+        <p>Access token: {accessToken}</p>
+      ) : (
+        <a href="/api/spotify_login">Login</a>
+      )}
     </>
   );
 };
