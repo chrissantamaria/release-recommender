@@ -10,7 +10,7 @@ const PostLogin = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     handlePostLogin(params);
-    navigate('/');
+    navigate('/', { replace: true });
   }, [handlePostLogin, navigate]);
 
   return <div />;
