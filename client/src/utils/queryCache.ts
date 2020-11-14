@@ -19,6 +19,7 @@ const queryCache = new QueryCache({
   defaultConfig: {
     queries: {
       queryFn: spotifyQueryFn,
+      refetchOnWindowFocus: false,
     },
   },
 });
