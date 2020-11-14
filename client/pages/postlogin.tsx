@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import useSpotifyStore from '../store/spotify';
+import useSpotifyStore from '@store/spotify';
 
 const PostLogin = () => {
   const router = useRouter();

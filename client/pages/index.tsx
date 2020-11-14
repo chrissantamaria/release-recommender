@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 
-import useSpotifyStore from '../store/spotify';
+import useSpotifyStore from '@store/spotify';
 
 const Home = () => {
   const accessToken = useSpotifyStore((state) => state.accessToken);
