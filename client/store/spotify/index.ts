@@ -12,6 +12,11 @@ const useSpotifyStore = createStore<State>(
         draft.accessToken = payload.accessToken;
         draft.refreshToken = payload.refreshToken;
       }),
+    logout: () =>
+      set((draft) => {
+        draft.accessToken = null;
+        draft.refreshToken = null;
+      }),
     getProfileData: async () => {
       const { accessToken } = get();
       if (!accessToken) {

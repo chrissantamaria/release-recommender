@@ -6,4 +6,5 @@ type Credentials = {
 export type State = Credentials & {
   handlePostLogin: (payload: Credentials) => void;
   getProfileData: () => Promise<unknown>;
+  logout: () => void;
 };
