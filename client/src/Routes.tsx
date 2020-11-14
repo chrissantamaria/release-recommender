@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 
 import useStore from './store';
 
