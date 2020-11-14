@@ -35,5 +35,16 @@ def spotify_callback():
     # Send response (including access + refresh tokens) to client as query params
     return redirect(f'{os.environ.get("APP_BASE_URL")}/postlogin?{urlencode(response)}')
 
+@app.route('/api/spotify_refresh')
+def spotify_refresh():
+    refresh_token = request.args.get('refreshToken')
+    response = requests.post(SPOTIFY_TOKEN_URL, data={
+        'grant_type': 'refresh_token',
+        'refresh_token': refresh_token,
+        'client_id': os.environ.get('SPOTIFY_CLIENT_ID'),
+        'client_secret': os.environ.get('SPOTIFY_CLIENT_SECRET'),
+    }).json()
+    return response
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))

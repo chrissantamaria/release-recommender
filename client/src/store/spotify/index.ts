@@ -1,37 +1,55 @@
 import withImmer from '../utils/withImmer';
 import createStore from 'zustand';
 import { persist } from 'zustand/middleware';
+import { addSeconds, isPast } from 'date-fns';
+import axios from 'axios';
 
 import { State } from './types';
+
+const parseExpiresIn = (expiresIn: number) =>
+  addSeconds(new Date(), expiresIn).toISOString();
 
 const useSpotifyStore = createStore<State>(
   persist(
     withImmer((set, get) => ({
       accessToken: null,
       refreshToken: null,
-      handlePostLogin: (payload) =>
+      expiresAt: null,
+      // TODO: handle missing query params
+      handlePostLogin: (params) =>
         set((draft) => {
-          draft.accessToken = payload.accessToken;
-          draft.refreshToken = payload.refreshToken;
+          draft.accessToken = params.get('access_token');
+          draft.refreshToken = params.get('refresh_token');
+          draft.expiresAt = parseExpiresIn(
+            Number.parseInt(params.get('expires_in') || '3600')
+          );
         }),
       logout: () =>
         set((draft) => {
           draft.accessToken = null;
           draft.refreshToken = null;
+          draft.expiresAt = null;
         }),
-      getProfileData: async () => {
-        const { accessToken } = get();
-        if (!accessToken) {
-          throw new Error('No access token set');
+      checkAccessToken: async () => {
+        const { refreshToken, expiresAt } = get();
+        if (!expiresAt) {
+          throw new Error('No expiresAt value set');
         }
 
-        const data = await fetch('https://api.spotify.com/v1/me', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }).then((res) => res.json());
+        if (isPast(new Date(expiresAt))) {
+          if (!refreshToken) {
+            throw new Error('No refreshToken value set');
+          }
 
-        return data;
+          const { data } = await axios.get(
+            `/api/spotify_refresh?refreshToken=${refreshToken}`
+          );
+
+          set((draft) => {
+            draft.accessToken = data.access_token;
+            draft.expiresAt = parseExpiresIn(data.expires_in);
+          });
+        }
       },
     })),
     {

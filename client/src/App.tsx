@@ -1,29 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Navigate, useRoutes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { ReactQueryCacheProvider } from 'react-query';
 
-import useSpotifyStore from './store/spotify';
-
-import Login from './pages/Login';
-import Home from './pages/Home';
-import PostLogin from './pages/PostLogin';
-
-const Routes = () => {
-  const accessToken = useSpotifyStore((state) => state.accessToken);
-
-  const routes = !accessToken
-    ? [
-        { path: '/', element: <Login /> },
-        { path: '/postlogin', element: <PostLogin /> },
-      ]
-    : [{ path: '/', element: <Home /> }];
-
-  return useRoutes([...routes, { path: '*', element: <Navigate to="/" /> }]);
-};
+import Routes from './Routes';
+import queryCache from './utils/queryCache';
 
 const App = () => (
-  <BrowserRouter>
-    <Routes />
-  </BrowserRouter>
+  <ReactQueryCacheProvider queryCache={queryCache}>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
+  </ReactQueryCacheProvider>
 );
 
 export default App;

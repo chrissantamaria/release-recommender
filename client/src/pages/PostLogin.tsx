@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { addSeconds } from 'date-fns';
 
 import useSpotifyStore from '../store/spotify';
 
@@ -9,11 +10,7 @@ const PostLogin = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    handlePostLogin({
-      accessToken: params.get('access_token'),
-      refreshToken: params.get('refresh_token'),
-    });
-
+    handlePostLogin(params);
     navigate('/');
   }, [handlePostLogin, navigate]);
 
