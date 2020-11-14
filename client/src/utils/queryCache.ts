@@ -1,10 +1,10 @@
 import { QueryCache } from 'react-query';
 import axios from 'axios';
 
-import useSpotifyStore from '../store/spotify';
+import useStore from '../store';
 
 const spotifyQueryFn = async (key: string) => {
-  const { accessToken, checkAccessToken } = useSpotifyStore.getState();
+  const { accessToken, checkAccessToken } = useStore.getState();
   await checkAccessToken();
 
   const { data } = await axios.get(`https://api.spotify.com/v1${key}`, {

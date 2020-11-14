@@ -1,14 +1,14 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
-import useSpotifyStore from './store/spotify';
+import useStore from './store';
 
 import Login from './pages/Login';
 import Home from './pages/Home';
 import PostLogin from './pages/PostLogin';
 
 const Routes = () => {
-  const accessToken = useSpotifyStore((state) => state.accessToken);
+  const accessToken = useStore((state) => state.accessToken);
 
   const routes = !accessToken
     ? [

@@ -3,10 +3,10 @@ import { jsx } from '@emotion/react';
 import { Fragment } from 'react';
 import { useQuery } from 'react-query';
 
-import useSpotifyStore from '../store/spotify';
+import useStore from '../store';
 
 const Home = () => {
-  const logout = useSpotifyStore((state) => state.logout);
+  const logout = useStore((state) => state.logout);
   const { data: profileData } = useQuery('/me');
   const { data: playlistData } = useQuery('/me/playlists');
 

@@ -1,4 +1,4 @@
-import withImmer from '../utils/withImmer';
+import withImmer from './utils/withImmer';
 import createStore from 'zustand';
 import { persist } from 'zustand/middleware';
 import { addSeconds, isPast } from 'date-fns';
@@ -9,7 +9,7 @@ import { State } from './types';
 const parseExpiresIn = (expiresIn: number) =>
   addSeconds(new Date(), expiresIn).toISOString();
 
-const useSpotifyStore = createStore<State>(
+const useStore = createStore<State>(
   persist(
     withImmer((set, get) => ({
       accessToken: null,
@@ -58,4 +58,4 @@ const useSpotifyStore = createStore<State>(
   )
 );
 
-export default useSpotifyStore;
+export default useStore;

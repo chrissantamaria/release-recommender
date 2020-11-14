@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addSeconds } from 'date-fns';
 
-import useSpotifyStore from '../store/spotify';
+import useStore from '../store';
 
 const PostLogin = () => {
   const navigate = useNavigate();
-  const handlePostLogin = useSpotifyStore((state) => state.handlePostLogin);
+  const handlePostLogin = useStore((state) => state.handlePostLogin);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
