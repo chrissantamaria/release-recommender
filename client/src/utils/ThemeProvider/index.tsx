@@ -55,6 +55,12 @@ const ThemeProvider = ({ children }: Props) => {
                 },
               },
             },
+            MuiButton: {
+              root: {
+                fontSize: '1rem',
+                textTransform: 'lowercase',
+              },
+            },
           },
           props: {
             MuiButton: {

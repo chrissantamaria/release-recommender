@@ -65,10 +65,17 @@ const Layout = () => {
           <Link className={styles.title} component={RouterLink} to="/">
             <Typography variant="h5">Release Recommender</Typography>
           </Link>
-          <Button className={styles.queue} color="inherit">
-            <QueueIcon className={styles.queueIcon} />
-            {numTracksInQueue} track{numTracksInQueue !== 1 && 's'}
-          </Button>
+          <Link
+            className={styles.queue}
+            component={RouterLink}
+            to="/queue"
+            underline="none"
+          >
+            <Button color="inherit">
+              <QueueIcon className={styles.queueIcon} />
+              {numTracksInQueue} track{numTracksInQueue !== 1 && 's'}
+            </Button>
+          </Link>
           <Button
             className={styles.logoutButton}
             color="inherit"

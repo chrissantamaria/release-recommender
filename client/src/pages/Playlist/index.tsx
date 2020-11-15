@@ -6,7 +6,7 @@ import AspectRatio from 'react-aspect-ratio';
 import usePlaylist from '../../utils/usePlaylist';
 import { Typography } from '@material-ui/core';
 
-import MuiTable from './Table';
+import Table from './Table';
 
 const useStyles = makeStyles({
   container: {
@@ -58,7 +58,7 @@ const Playlist = () => {
           )}
         </div>
       </div>
-      <MuiTable tracks={tracks} />
+      <Table tracks={tracks} />
     </div>
   );
 };

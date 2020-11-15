@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import PostLogin from './pages/PostLogin';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import Queue from './pages/Queue';
 import Playlist from './pages/Playlist';
 
 const Routes = () => {
@@ -23,6 +24,7 @@ const Routes = () => {
           element: <Layout />,
           children: [
             { path: '/', element: <Home /> },
+            { path: 'queue', element: <Queue /> },
             { path: 'playlist/:id', element: <Playlist /> },
           ],
         },
