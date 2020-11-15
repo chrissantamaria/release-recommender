@@ -8,6 +8,7 @@ import PostLogin from './pages/PostLogin';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Queue from './pages/Queue';
+import Recommendations from './pages/Recommendations';
 import Playlist from './pages/Playlist';
 
 const Routes = () => {
@@ -25,6 +26,7 @@ const Routes = () => {
           children: [
             { path: '/', element: <Home /> },
             { path: 'queue', element: <Queue /> },
+            { path: 'recs', element: <Recommendations /> },
             { path: 'playlist/:id', element: <Playlist /> },
           ],
         },
