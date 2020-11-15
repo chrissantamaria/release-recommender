@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import { decode } from 'he';
 import fetchFromSpotify from './fetchFromSpotify';
 
 type PlaylistsResponse = {
@@ -19,7 +20,7 @@ const usePlaylists = () =>
     const data = (await fetchFromSpotify('/me/playlists')) as PlaylistsResponse;
     return data.items.map((item) => ({
       id: item.id,
-      title: item.name,
+      title: decode(item.name),
       image: item.images[0].url,
       numTracks: item.tracks.total,
     }));

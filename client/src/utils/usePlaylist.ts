@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import { decode } from 'he';
 import fetchFromSpotify from './fetchFromSpotify';
 
 type PlaylistResponse = {
@@ -30,15 +31,15 @@ const usePlaylist = (id: string) =>
     )) as PlaylistResponse;
 
     return {
-      title: data.name,
-      description: data.description,
+      title: decode(data.name),
+      description: decode(data.description),
       image: data.images[0].url,
       tracks: data.tracks.items.map((item) => ({
         id: item.track.id,
-        title: item.track.name,
+        title: decode(item.track.name),
         // TODO: handle multiple artists
-        artist: item.track.artists[0].name,
-        album: item.track.album.name,
+        artist: decode(item.track.artists[0].name),
+        album: decode(item.track.album.name),
       })),
     };
   });
