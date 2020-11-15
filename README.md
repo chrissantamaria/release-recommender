@@ -30,7 +30,7 @@ cd api
 # build + host image on Cloud Build
 gcloud builds submit --tag gcr.io/release-recommender/api
 # deploy the new function
-gcloud beta run deploy --image gcr.io/release-recommender/api
+gcloud run deploy --image gcr.io/release-recommender/api
 ```
 
 You can also set default deployment settings:
