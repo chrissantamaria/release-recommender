@@ -32,6 +32,7 @@ const useStore = createStore<State>(
           draft.accessToken = null;
           draft.refreshToken = null;
           draft.expiresAt = null;
+          draft.queue = [];
         }),
       checkAccessToken: async () => {
         const { refreshToken, expiresAt } = get();
