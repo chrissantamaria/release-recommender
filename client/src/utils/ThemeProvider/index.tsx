@@ -66,6 +66,9 @@ const ThemeProvider = ({ children }: Props) => {
             MuiLink: {
               color: 'inherit',
             },
+            MuiPaper: {
+              elevation: 0,
+            },
           },
         })
       ),

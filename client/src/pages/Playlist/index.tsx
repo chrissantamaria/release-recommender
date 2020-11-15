@@ -1,12 +1,12 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AspectRatio from 'react-aspect-ratio';
-import { ArrowDownward } from '@material-ui/icons';
-import MaterialTable, { Icons } from 'material-table';
 
-import usePlaylist from '../utils/usePlaylist';
+import usePlaylist from '../../utils/usePlaylist';
 import { Typography } from '@material-ui/core';
+
+import MuiTable from './Table';
 
 const useStyles = makeStyles({
   container: {
@@ -29,33 +29,6 @@ const useStyles = makeStyles({
     justifyContent: 'flex-end',
   },
 });
-
-const tableOptions = {
-  columns: [
-    {
-      title: 'Title',
-      field: 'title',
-    },
-    {
-      title: 'Artist',
-      field: 'artist',
-    },
-    {
-      title: 'Album',
-      field: 'album',
-    },
-  ],
-  options: {
-    toolbar: false,
-    search: false,
-    paging: false,
-  },
-  icons: {
-    SortArrow: forwardRef((props, ref) => (
-      <ArrowDownward {...props} ref={ref} />
-    )),
-  } as Icons,
-};
 
 const Playlist = () => {
   const styles = useStyles();
@@ -85,7 +58,7 @@ const Playlist = () => {
           )}
         </div>
       </div>
-      <MaterialTable {...tableOptions} data={tracks} />
+      <MuiTable tracks={tracks} />
     </div>
   );
 };
