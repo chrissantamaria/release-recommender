@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core/styles';
 
 import './globals.css';
+import './fonts.scss';
 
 type ColorScheme = {
   isDarkMode: boolean;
@@ -39,6 +40,21 @@ const ThemeProvider = ({ children }: Props) => {
               main: '#8739e5',
             },
             type: isDarkMode ? 'dark' : 'light',
+          },
+          typography: {
+            fontFamily: [
+              'Inter',
+              '-apple-system',
+              'BlinkMacSystemFont',
+              '"Segoe UI"',
+              'Roboto',
+              '"Helvetica Neue"',
+              'Arial',
+              'sans-serif',
+              '"Apple Color Emoji"',
+              '"Segoe UI Emoji"',
+              '"Segoe UI Symbol"',
+            ].join(','),
           },
           overrides: {
             MuiCssBaseline: {
