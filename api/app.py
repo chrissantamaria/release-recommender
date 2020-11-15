@@ -7,6 +7,7 @@ from predict import create_recommendations
 
 SPOTIFY_AUTH_URL = 'https://accounts.spotify.com/authorize'
 SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token'
+SPOTIFY_SCOPE = 'user-read-private playlist-read-private playlist-read-collaborative'
 SPOTIFY_REDIRECT_URI = f'{os.environ.get("APP_BASE_URL")}/api/spotify_callback'
 
 app = Flask(__name__)
@@ -21,7 +22,7 @@ def spotify_login():
     params = urlencode({
         'response_type': 'code',
         'client_id': os.environ.get('SPOTIFY_CLIENT_ID'),
-        'scope': 'user-read-private user-read-email',
+        'scope': SPOTIFY_SCOPE,
         'redirect_uri': SPOTIFY_REDIRECT_URI
     })
     return redirect(f'{SPOTIFY_AUTH_URL}?{params}')
