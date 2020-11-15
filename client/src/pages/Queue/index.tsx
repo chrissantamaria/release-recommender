@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Link, Typography } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 import useStore from '../../store';
 
@@ -42,9 +43,11 @@ const Queue = () => {
             you need at least 8 tracks for a prediction. go add some more!
           </Typography>
         ) : (
-          <Button variant="contained" color="primary">
-            make it a playlist ;)
-          </Button>
+          <Link component={RouterLink} to="/recs" underline="none">
+            <Button variant="contained" color="primary">
+              make it a playlist ;)
+            </Button>
+          </Link>
         )}
       </div>
       <Table tracks={queuedTracks} />
