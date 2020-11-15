@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import usePlaylists from '../utils/usePlaylists';
-import PlaylistPreview from '../components/PlaylistPreview';
+import usePlaylists from '../../utils/usePlaylists';
+import PlaylistPreview from './PlaylistPreview';
 
 const useStyles = makeStyles({
   container: {
