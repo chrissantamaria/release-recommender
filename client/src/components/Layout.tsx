@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Button, IconButton, Toolbar } from '@material-ui/core';
+import { AppBar, Button, IconButton, Grid, Toolbar } from '@material-ui/core';
 import {
   WbSunny as SunIcon,
   Brightness2 as MoonIcon,
@@ -11,6 +11,11 @@ import useStore from '../store';
 import { useColorScheme } from '../utils/ThemeProvider';
 
 const useStyles = makeStyles({
+  container: {
+    height: '100%',
+    display: 'grid',
+    gridTemplateRows: 'auto 1fr',
+  },
   toolbar: {
     justifyContent: 'flex-end',
   },
@@ -20,6 +25,9 @@ const useStyles = makeStyles({
   sunIcon: {
     color: 'white',
   },
+  contentContainer: {
+    overflowY: 'scroll',
+  },
 });
 
 const Layout = () => {
@@ -28,7 +36,7 @@ const Layout = () => {
   const { isDarkMode, toggleColorScheme } = useColorScheme();
 
   return (
-    <div>
+    <div className={styles.container}>
       <AppBar position="sticky">
         <Toolbar className={styles.toolbar}>
           <IconButton
@@ -42,7 +50,11 @@ const Layout = () => {
           </Button>
         </Toolbar>
       </AppBar>
-      <Outlet />
+      <Grid className={styles.contentContainer} container justify="center">
+        <Grid item sm={12} md={10} lg={9} xl={8}>
+          <Outlet />
+        </Grid>
+      </Grid>
     </div>
   );
 };

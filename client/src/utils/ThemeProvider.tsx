@@ -41,8 +41,15 @@ const ThemeProvider = ({ children }: Props) => {
           overrides: {
             MuiCssBaseline: {
               '@global': {
+                html: {
+                  height: '100%',
+                },
                 body: {
+                  height: '100%',
                   transition: 'color 200ms ease, background-color 200ms ease',
+                },
+                '#root': {
+                  height: '100%',
                 },
               },
             },
