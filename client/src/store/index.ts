@@ -59,6 +59,10 @@ const useStore = createStore<State>(
         set((draft) => {
           draft.queue = unionBy(original(draft.queue), [track], 'id');
         }),
+      addMultipleToQueue: (tracks) =>
+        set((draft) => {
+          draft.queue = unionBy(original(draft.queue), tracks, 'id');
+        }),
       removeFromQueue: ({ id }) =>
         set((draft) => {
           draft.queue = draft.queue.filter((track) => track.id !== id);

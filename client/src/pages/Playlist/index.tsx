@@ -1,10 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AspectRatio from 'react-aspect-ratio';
 
 import usePlaylist from '../../utils/usePlaylist';
-import { Typography } from '@material-ui/core';
+import useStore from '../../store';
 
 import Table from './Table';
 
@@ -28,16 +29,24 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     justifyContent: 'flex-end',
   },
+  addAllButton: {
+    marginBottom: '1rem',
+  },
 });
 
 const Playlist = () => {
   const styles = useStyles();
-
   const { id } = useParams();
+  const addMultipleToQueue = useStore((state) => state.addMultipleToQueue);
+
   const { data } = usePlaylist(id);
   if (!data) return null;
 
   const { title, description, image, tracks } = data;
+
+  const handleClick = () => {
+    addMultipleToQueue(tracks);
+  };
 
   return (
     <div className={styles.container}>
@@ -58,6 +67,14 @@ const Playlist = () => {
           )}
         </div>
       </div>
+      <Button
+        className={styles.addAllButton}
+        variant="contained"
+        color="primary"
+        onClick={handleClick}
+      >
+        add all to queue
+      </Button>
       <Table tracks={tracks} />
     </div>
   );

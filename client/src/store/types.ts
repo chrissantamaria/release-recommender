@@ -17,5 +17,6 @@ export type State = Credentials & {
   checkAccessToken: () => Promise<void>;
   logout: () => void;
   addToQueue: (track: Track) => void;
+  addMultipleToQueue: (tracks: Track[]) => void;
   removeFromQueue: (track: Track) => void;
 };
