@@ -37,6 +37,9 @@ const ThemeProvider = ({ children }: Props) => {
       responsiveFontSizes(
         createMuiTheme({
           palette: {
+            primary: {
+              main: '#8739e5',
+            },
             type: isDarkMode ? 'dark' : 'light',
           },
           overrides: {
