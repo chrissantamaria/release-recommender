@@ -3,6 +3,7 @@ import createStore from 'zustand';
 import { persist } from 'zustand/middleware';
 import { addSeconds, isPast } from 'date-fns';
 import axios from 'axios';
+import { original } from 'immer';
 
 import { State } from './types';
 
@@ -15,6 +16,7 @@ const useStore = createStore<State>(
       accessToken: null,
       refreshToken: null,
       expiresAt: null,
+      queue: [],
       // TODO: handle missing query params
       handlePostLogin: (params) =>
         set((draft) => {
@@ -51,6 +53,18 @@ const useStore = createStore<State>(
           });
         }
       },
+      addToQueue: (id) =>
+        set((draft) => {
+          const set = new Set(original(draft.queue));
+          set.add(id);
+          draft.queue = Array.from(set);
+        }),
+      removeFromQueue: (id) =>
+        set((draft) => {
+          const set = new Set(original(draft.queue));
+          set.delete(id);
+          draft.queue = Array.from(set);
+        }),
     })),
     {
       name: 'spotify',
