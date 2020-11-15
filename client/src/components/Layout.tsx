@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
@@ -54,16 +54,22 @@ const useStyles = makeStyles({
 
 const Layout = () => {
   const styles = useStyles();
+  const navigate = useNavigate();
   const logout = useStore((state) => state.logout);
   const { isDarkMode, toggleColorScheme } = useColorScheme();
   const numTracksInQueue = useStore((state) => state.queue.length);
+
+  const handleLogout = () => {
+    navigate('/');
+    logout();
+  };
 
   return (
     <div className={styles.container}>
       <AppBar position="sticky">
         <Toolbar className={styles.toolbar}>
           <Link className={styles.title} component={RouterLink} to="/">
-            <Typography variant="h5">Release Recommender</Typography>
+            <Typography variant="h5">release recommender</Typography>
           </Link>
           <Link
             className={styles.queue}
@@ -79,9 +85,9 @@ const Layout = () => {
           <Button
             className={styles.logoutButton}
             color="inherit"
-            onClick={logout}
+            onClick={handleLogout}
           >
-            Log Out
+            log out
           </Button>
           <IconButton onClick={toggleColorScheme}>
             {isDarkMode ? <MoonIcon /> : <SunIcon className={styles.sunIcon} />}
