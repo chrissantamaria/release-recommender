@@ -39,6 +39,15 @@ const ThemeProvider = ({ children }: Props) => {
           palette: {
             type: isDarkMode ? 'dark' : 'light',
           },
+          overrides: {
+            MuiCssBaseline: {
+              '@global': {
+                body: {
+                  transition: 'color 200ms ease, background-color 200ms ease',
+                },
+              },
+            },
+          },
           props: {
             MuiButton: {
               disableElevation: true,
