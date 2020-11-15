@@ -1,7 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Button, IconButton, Grid, Toolbar } from '@material-ui/core';
+import {
+  AppBar,
+  Button,
+  IconButton,
+  Grid,
+  Link,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   WbSunny as SunIcon,
   Brightness2 as MoonIcon,
@@ -19,6 +28,10 @@ const useStyles = makeStyles({
   },
   toolbar: {
     justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  title: {
+    marginRight: 'auto',
   },
   logoutButton: {
     marginRight: '1rem',
@@ -49,6 +62,9 @@ const Layout = () => {
     <div className={styles.container}>
       <AppBar position="sticky">
         <Toolbar className={styles.toolbar}>
+          <Link className={styles.title} component={RouterLink} to="/">
+            <Typography variant="h5">Release Recommender</Typography>
+          </Link>
           <Button className={styles.queue} color="inherit">
             <QueueIcon className={styles.queueIcon} />
             {numTracksInQueue} track{numTracksInQueue !== 1 && 's'}
