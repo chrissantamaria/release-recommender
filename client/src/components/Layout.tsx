@@ -29,7 +29,7 @@ const Layout = () => {
 
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar className={styles.toolbar}>
           <IconButton
             className={styles.colorSchemeButton}

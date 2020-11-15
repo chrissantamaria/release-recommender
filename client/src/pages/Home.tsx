@@ -1,26 +1,35 @@
 import React from 'react';
-import { useQuery } from 'react-query';
-import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+import usePlaylists from '../utils/usePlaylists';
+import PlaylistPreview from '../components/PlaylistPreview';
+
+const useStyles = makeStyles({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  preview: {
+    margin: '1rem',
+  },
+});
 
 const Home = () => {
-  const { data: profileData } = useQuery('/me');
-  const { data: playlistData } = useQuery('/me/playlists');
+  const styles = useStyles();
+
+  const { data: playlists } = usePlaylists();
+  if (!playlists) return null;
 
   return (
-    <>
-      {profileData && (
-        <div>
-          <Typography variant="h4">Profile:</Typography>
-          <pre>{JSON.stringify(profileData, null, 2)}</pre>
-        </div>
-      )}
-      {playlistData && (
-        <div>
-          <Typography variant="h4">Playlists:</Typography>
-          <pre>{JSON.stringify(playlistData, null, 2)}</pre>
-        </div>
-      )}
-    </>
+    <div className={styles.container}>
+      {playlists.map((playlist) => (
+        <PlaylistPreview
+          key={playlist.id}
+          className={styles.preview}
+          {...playlist}
+        />
+      ))}
+    </div>
   );
 };
 

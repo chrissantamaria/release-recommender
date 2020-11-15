@@ -46,6 +46,9 @@ const ThemeProvider = ({ children }: Props) => {
             MuiAppBar: {
               elevation: 0,
             },
+            MuiLink: {
+              color: 'inherit',
+            },
           },
         })
       ),
