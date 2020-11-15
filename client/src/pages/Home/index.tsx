@@ -20,9 +20,7 @@ const useStyles = makeStyles({
 
 const Home = () => {
   const styles = useStyles();
-
   const { data: playlists } = usePlaylists();
-  if (!playlists) return null;
 
   return (
     <div>
@@ -35,15 +33,17 @@ const Home = () => {
         </Typography>
         <Typography variant="h6">more songs = more recommendations</Typography>
       </div>
-      <div className={styles.grid}>
-        {playlists.map((playlist) => (
-          <PlaylistPreview
-            key={playlist.id}
-            className={styles.preview}
-            {...playlist}
-          />
-        ))}
-      </div>
+      {playlists && (
+        <div className={styles.grid}>
+          {playlists.map((playlist) => (
+            <PlaylistPreview
+              key={playlist.id}
+              className={styles.preview}
+              {...playlist}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
