@@ -21,11 +21,15 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     marginBottom: '1rem',
   },
+  submitButton: {
+    marginRight: '1rem',
+  },
 });
 
 const Queue = () => {
   const styles = useStyles();
   const queuedTracks = useStore((state) => state.queue);
+  const clearQueue = useStore((state) => state.clearQueue);
 
   if (!queuedTracks.length) {
     return (
@@ -43,11 +47,21 @@ const Queue = () => {
             you need at least 8 tracks for a prediction. go add some more!
           </Typography>
         ) : (
-          <Link component={RouterLink} to="/recs" underline="none">
-            <Button variant="contained" color="primary">
-              make it a playlist ;)
+          <>
+            <Link
+              className={styles.submitButton}
+              component={RouterLink}
+              to="/recs"
+              underline="none"
+            >
+              <Button variant="contained" color="primary">
+                make it a playlist ;)
+              </Button>
+            </Link>
+            <Button variant="contained" color="primary" onClick={clearQueue}>
+              clear queue
             </Button>
-          </Link>
+          </>
         )}
       </div>
       <Table tracks={queuedTracks} />

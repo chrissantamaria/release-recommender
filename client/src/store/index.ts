@@ -67,6 +67,10 @@ const useStore = createStore<State>(
         set((draft) => {
           draft.queue = draft.queue.filter((track) => track.id !== id);
         }),
+      clearQueue: () =>
+        set((draft) => {
+          draft.queue = [];
+        }),
     })),
     {
       name: 'spotify',
