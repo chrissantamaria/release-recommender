@@ -29,7 +29,7 @@ const Queue = () => {
   if (!queuedTracks.length) {
     return (
       <Typography className={styles.noTracks} variant="h5" align="center">
-        You have no tracks in your queue! Go add some.
+        you have no tracks in your queue! go add some.
       </Typography>
     );
   }
@@ -37,9 +37,15 @@ const Queue = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <Button variant="contained" color="primary">
-          make it a playlist ;)
-        </Button>
+        {queuedTracks.length < 8 ? (
+          <Typography variant="h5" align="center">
+            you need at least 8 tracks for a prediction. go add some more!
+          </Typography>
+        ) : (
+          <Button variant="contained" color="primary">
+            make it a playlist ;)
+          </Button>
+        )}
       </div>
       <Table tracks={queuedTracks} />
     </div>
