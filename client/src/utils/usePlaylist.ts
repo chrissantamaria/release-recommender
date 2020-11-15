@@ -28,7 +28,6 @@ const usePlaylist = (id: string) =>
     const data = (await fetchFromSpotify(
       `/playlists/${id}`
     )) as PlaylistResponse;
-    console.log(data);
 
     return {
       title: data.name,

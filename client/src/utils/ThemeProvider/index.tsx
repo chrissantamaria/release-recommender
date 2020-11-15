@@ -6,6 +6,8 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from '@material-ui/core/styles';
 
+import './globals.css';
+
 type ColorScheme = {
   isDarkMode: boolean;
   toggleColorScheme: () => void;
