@@ -3,10 +3,11 @@ import { useRoutes } from 'react-router-dom';
 
 import useStore from './store';
 
-import Layout from './components/Layout';
 import Login from './pages/Login';
-import Home from './pages/Home';
 import PostLogin from './pages/PostLogin';
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import Playlist from './pages/Playlist';
 
 const Routes = () => {
   const accessToken = useStore((state) => state.accessToken);
@@ -22,7 +23,7 @@ const Routes = () => {
           element: <Layout />,
           children: [
             { path: '/', element: <Home /> },
-            { path: 'test', element: <h2>test</h2> },
+            { path: 'playlist/:id', element: <Playlist /> },
           ],
         },
       ];
