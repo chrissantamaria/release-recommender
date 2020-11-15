@@ -19,32 +19,31 @@ def create_recommendations(song_ids):
   access_token = get_access_token()
 
   def get_track_features(ids):
-    return requests.get(f'https://api.spotify.com/v1/audio-features/?ids={ids}', headers={
+    response = requests.get(f'https://api.spotify.com/v1/audio-features/?ids={ids}', headers={
         'Authorization': f'Bearer {access_token}'
     }).json()
+    return response['audio_features']
 
   def get_new_releases():
-    # Pulling data from top 50 chart
-    return requests.get(f'https://api.spotify.com/v1/playlists/{TOP_50_PLAYLIST_URI}/tracks', headers={
+    response = requests.get(f'https://api.spotify.com/v1/playlists/{TOP_50_PLAYLIST_URI}/tracks', headers={
         'Authorization': f'Bearer {access_token}'
     }).json()
+    return response['items']
 
   ids = ",".join(song_ids)
-  songs = pd.DataFrame(get_track_features(ids)['audio_features'])
+  songs = pd.DataFrame(get_track_features(ids))
 
   features = songs[FEATURE_KEYS]
-  features_dummy = pd.get_dummies(features, columns=['key', 'mode', 'time_signature'])
-  # Creating Train dataset
-  train = features_dummy
+  train = pd.get_dummies(features, columns=['key', 'mode', 'time_signature'])
   
   # Creating Test dataset
-  ids = get_new_releases()['items']
+  ids = get_new_releases()
   add = []
   for i in range(50):
     add.append(ids[i]['track']['uri'][-22:])
 
   new_ids = ','.join(add)
-  test_songs = pd.DataFrame(get_track_features(new_ids)['audio_features'])
+  test_songs = pd.DataFrame(get_track_features(new_ids))
   test_features = test_songs[FEATURE_KEYS]
   test = pd.get_dummies(test_features, columns=['key', 'mode', 'time_signature'])
 
