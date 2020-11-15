@@ -3,6 +3,7 @@ import createStore from 'zustand';
 import { persist } from 'zustand/middleware';
 import { addSeconds, isPast } from 'date-fns';
 import axios from 'axios';
+import unionBy from 'lodash/unionBy';
 import { original } from 'immer';
 
 import { State } from './types';
@@ -53,17 +54,13 @@ const useStore = createStore<State>(
           });
         }
       },
-      addToQueue: (id) =>
+      addToQueue: (track) =>
         set((draft) => {
-          const set = new Set(original(draft.queue));
-          set.add(id);
-          draft.queue = Array.from(set);
+          draft.queue = unionBy(original(draft.queue), [track], 'id');
         }),
-      removeFromQueue: (id) =>
+      removeFromQueue: ({ id }) =>
         set((draft) => {
-          const set = new Set(original(draft.queue));
-          set.delete(id);
-          draft.queue = Array.from(set);
+          draft.queue = draft.queue.filter((track) => track.id !== id);
         }),
     })),
     {
@@ -73,3 +70,4 @@ const useStore = createStore<State>(
 );
 
 export default useStore;
+export * from './types';

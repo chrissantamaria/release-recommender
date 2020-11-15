@@ -10,26 +10,21 @@ import {
   TableCell,
 } from '@material-ui/core';
 import { Add as AddIcon, Check as CheckIcon } from '@material-ui/icons';
+import find from 'lodash/find';
 
-import useStore from '../../store';
+import useStore, { Track } from '../../store';
 
-type Track = {
-  id: string;
-  title: string;
-  artist: string;
-  album: string;
-};
-
-const Row = ({ id, title, artist, album }: Track) => {
-  const isInQueue = useStore((state) => state.queue.includes(id));
+const Row = (track: Track) => {
+  const { id, title, artist, album } = track;
+  const isInQueue = useStore((state) => !!find(state.queue, { id }));
   const addToQueue = useStore((state) => state.addToQueue);
   const removeFromQueue = useStore((state) => state.removeFromQueue);
 
   const handleClick = () => {
     if (!isInQueue) {
-      addToQueue(id);
+      addToQueue(track);
     } else {
-      removeFromQueue(id);
+      removeFromQueue(track);
     }
   };
 
