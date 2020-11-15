@@ -18,7 +18,7 @@ const fetchRecs = async (trackIds: string[]) => {
   const { data: recIds } = await axios.post('/api/predict', trackIds);
 
   const rawTracks = (await fetchFromSpotify(
-    `/tracks?ids=${recIds.join(',')}`
+    `https://api.spotify.com/v1/tracks?ids=${recIds.join(',')}`
   )) as TracksResponse;
 
   return rawTracks.tracks.map((track) => ({

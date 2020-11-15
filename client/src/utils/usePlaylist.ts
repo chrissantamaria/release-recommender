@@ -27,7 +27,7 @@ type PlaylistResponse = {
 const usePlaylist = (id: string) =>
   useQuery(['playlist', id], async () => {
     const data = (await fetchFromSpotify(
-      `/playlists/${id}`
+      `https://api.spotify.com/v1/playlists/${id}`
     )) as PlaylistResponse;
 
     return {
