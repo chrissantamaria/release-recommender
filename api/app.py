@@ -1,7 +1,9 @@
 import os
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, jsonify
 import requests
 from urllib.parse import urlencode
+
+from predict import create_recommendations
 
 SPOTIFY_AUTH_URL = 'https://accounts.spotify.com/authorize'
 SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token'
@@ -9,9 +11,10 @@ SPOTIFY_REDIRECT_URI = f'{os.environ.get("APP_BASE_URL")}/api/spotify_callback'
 
 app = Flask(__name__)
 
-@app.route('/api/hello')
-def hello_world():
-    return 'Some crazy model prediction!'
+@app.route('/api/predict', methods=['POST'])
+def predict():
+    recs = create_recommendations(request.json)
+    return jsonify(recs)
 
 @app.route('/api/spotify_login')
 def spotify_login():
