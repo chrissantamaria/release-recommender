@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
-import { CssBaseline, useMediaQuery } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 import {
   createMuiTheme,
   responsiveFontSizes,
@@ -22,11 +22,7 @@ type Props = {
 };
 
 const ThemeProvider = ({ children }: Props) => {
-  const [isDarkMode, setIsDarkMode] = useState(
-    useMediaQuery('(prefers-color-scheme: dark)', {
-      noSsr: true,
-    })
-  );
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const toggleColorScheme = () => {
     setIsDarkMode((val) => !val);
