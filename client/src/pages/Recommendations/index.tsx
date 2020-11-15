@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 
 import useStore, { Track } from '../../store';
 import { useNavigate } from 'react-router-dom';
 
-import fetchTracks from './fetchTracks';
+import fetchRecs from './fetchRecs';
 import data from './data';
 
 import Table from './Table';
@@ -28,12 +27,7 @@ const Recommendations = () => {
       return;
     }
 
-    axios
-      .post('/api/predict', data)
-      .then(({ data }) => {
-        return fetchTracks(data);
-      })
-      .then(setRecs);
+    fetchRecs(data).then(setRecs);
   }, [navigate, trackIds]);
 
   if (!recs) return null;

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import fetchFromSpotify from '../../utils/fetchFromSpotify';
 
 type TracksResponse = {
@@ -13,11 +14,14 @@ type TracksResponse = {
   }[];
 };
 
-const fetchTracks = async (trackIds: string[]) => {
-  const data = (await fetchFromSpotify(
-    `/tracks?ids=${trackIds.join(',')}`
+const fetchRecs = async (trackIds: string[]) => {
+  const { data: recIds } = await axios.post('/api/predict', trackIds);
+
+  const rawTracks = (await fetchFromSpotify(
+    `/tracks?ids=${recIds.join(',')}`
   )) as TracksResponse;
-  return data.tracks.map((track) => ({
+
+  return rawTracks.tracks.map((track) => ({
     id: track.id,
     title: track.name,
     artist: track.artists[0].name,
@@ -25,4 +29,4 @@ const fetchTracks = async (trackIds: string[]) => {
   }));
 };
 
-export default fetchTracks;
+export default fetchRecs;
