@@ -10,6 +10,7 @@ type PlaylistResponse = {
   }[];
   tracks: {
     items: {
+      type: string;
       track: {
         id: string;
         name: string;
@@ -34,13 +35,16 @@ const usePlaylist = (id: string) =>
       title: decode(data.name),
       description: decode(data.description),
       image: data.images?.[0]?.url,
-      tracks: data.tracks.items.map((item) => ({
-        id: item.track.id,
-        title: decode(item.track.name),
-        // TODO: handle multiple artists
-        artist: decode(item.track.artists[0].name),
-        album: decode(item.track.album.name),
-      })),
+      tracks: data.tracks.items
+        // Some playlists items with empty track data, filtering those out
+        .filter((item) => item.track)
+        .map((item) => ({
+          id: item.track.id,
+          title: decode(item.track.name),
+          // TODO: handle multiple artists
+          artist: decode(item.track.artists[0].name),
+          album: decode(item.track.album.name),
+        })),
     };
   });
 
