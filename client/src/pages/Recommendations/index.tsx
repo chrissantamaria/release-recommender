@@ -18,17 +18,16 @@ const useStyles = makeStyles({
 const Recommendations = () => {
   const styles = useStyles();
   const navigate = useNavigate();
-  const trackIds = useStore((state) => state.queue.map((track) => track.id));
   const [recs, setRecs] = useState<null | Track[]>(null);
 
   useEffect(() => {
+    const trackIds = useStore.getState().queue.map((track) => track.id);
     if (!trackIds.length) {
       navigate('/', { replace: true });
       return;
     }
 
-    fetchRecs(data).then(setRecs);
-  }, [navigate, trackIds]);
+  }, [navigate]);
 
   if (!recs) return null;
 
