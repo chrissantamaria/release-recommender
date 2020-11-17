@@ -27,6 +27,7 @@ const Recommendations = () => {
       return;
     }
 
+    fetchRecs(data).then(setRecs);
   }, [navigate]);
 
   if (!recs) return null;
