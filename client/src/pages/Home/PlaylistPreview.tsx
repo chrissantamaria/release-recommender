@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link, Typography } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 
+import placeholderImage from '../../images/album-placeholder.png';
+
 const useStyles = makeStyles({
   container: {
     width: 200,
@@ -17,7 +19,7 @@ type Props = {
   id: string;
   className: undefined | string;
   title: string;
-  image: string;
+  image?: string;
   numTracks: number;
 };
 
@@ -31,7 +33,7 @@ const PlaylistPreview = ({ id, className, title, image, numTracks }: Props) => {
       <Link component={RouterLink} to={href}>
         <img
           className={styles.img}
-          src={image}
+          src={image || placeholderImage}
           alt={`Artwork for ${title}`}
           width="100%"
           height={200}

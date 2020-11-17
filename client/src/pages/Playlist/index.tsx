@@ -7,6 +7,7 @@ import AspectRatio from 'react-aspect-ratio';
 import usePlaylist from '../../utils/usePlaylist';
 import useStore from '../../store';
 
+import placeholderImage from '../../images/album-placeholder.png';
 import Table from './Table';
 
 const useStyles = makeStyles({
@@ -54,7 +55,7 @@ const Playlist = () => {
         <AspectRatio className={styles.imageContainer} ratio="1/1">
           <img
             className={styles.image}
-            src={image}
+            src={image || placeholderImage}
             alt={`Artwork for ${title}`}
           />
         </AspectRatio>

@@ -33,7 +33,7 @@ const usePlaylist = (id: string) =>
     return {
       title: decode(data.name),
       description: decode(data.description),
-      image: data.images[0].url,
+      image: data.images?.[0]?.url,
       tracks: data.tracks.items.map((item) => ({
         id: item.track.id,
         title: decode(item.track.name),
