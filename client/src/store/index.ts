@@ -55,12 +55,9 @@ const useStore = createStore<State>(
           });
         }
       },
-      addToQueue: (track) =>
+      addToQueue: (param) =>
         set((draft) => {
-          draft.queue = unionBy(original(draft.queue), [track], 'id');
-        }),
-      addMultipleToQueue: (tracks) =>
-        set((draft) => {
+          const tracks = Array.isArray(param) ? param : [param];
           draft.queue = unionBy(original(draft.queue), tracks, 'id');
         }),
       removeFromQueue: ({ id }) =>

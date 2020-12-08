@@ -38,7 +38,7 @@ const useStyles = makeStyles({
 const Playlist = () => {
   const styles = useStyles();
   const { id } = useParams();
-  const addMultipleToQueue = useStore((state) => state.addMultipleToQueue);
+  const addToQueue = useStore((state) => state.addToQueue);
 
   const { data } = usePlaylist(id);
   if (!data) return null;
@@ -46,7 +46,7 @@ const Playlist = () => {
   const { title, description, image, tracks } = data;
 
   const handleClick = () => {
-    addMultipleToQueue(tracks);
+    addToQueue(tracks);
   };
 
   return (

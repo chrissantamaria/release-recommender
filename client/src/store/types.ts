@@ -16,8 +16,7 @@ export type State = Credentials & {
   handlePostLogin: (params: URLSearchParams) => void;
   checkAccessToken: () => Promise<void>;
   logout: () => void;
-  addToQueue: (track: Track) => void;
-  addMultipleToQueue: (tracks: Track[]) => void;
+  addToQueue: (param: Track | Track[]) => void;
   removeFromQueue: (track: Track) => void;
   clearQueue: () => void;
 };
