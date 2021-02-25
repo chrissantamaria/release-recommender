@@ -11,13 +11,17 @@ import { State } from './types';
 const parseExpiresIn = (expiresIn: number) =>
   addSeconds(new Date(), expiresIn).toISOString();
 
+const INITIAL_STATE = {
+  accessToken: null,
+  refreshToken: null,
+  expiresAt: null,
+  queue: [],
+};
+
 const useStore = createStore<State>(
   persist(
     withImmer((set, get) => ({
-      accessToken: null,
-      refreshToken: null,
-      expiresAt: null,
-      queue: [],
+      ...INITIAL_STATE,
       // TODO: handle missing query params
       handlePostLogin: (params) =>
         set((draft) => {
@@ -27,13 +31,7 @@ const useStore = createStore<State>(
             Number.parseInt(params.get('expires_in') || '3600')
           );
         }),
-      logout: () =>
-        set((draft) => {
-          draft.accessToken = null;
-          draft.refreshToken = null;
-          draft.expiresAt = null;
-          draft.queue = [];
-        }),
+      logout: () => set(() => INITIAL_STATE),
       checkAccessToken: async () => {
         const { refreshToken, expiresAt } = get();
         if (!expiresAt) {
