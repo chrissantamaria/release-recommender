@@ -14,15 +14,20 @@ import type { Track } from '../store';
 type Props = {
   tracks: Track[];
   rowComponent: (track: Track) => JSX.Element;
+  includeEmptyCol?: boolean;
 };
 
-const TrackTable = ({ tracks, rowComponent: Row }: Props) => {
+const TrackTable = ({
+  includeEmptyCol = true,
+  tracks,
+  rowComponent: Row,
+}: Props) => {
   return (
     <TableContainer component={Paper}>
       <MuiTable>
         <TableHead>
           <TableRow>
-            <TableCell />
+            {includeEmptyCol && <TableCell />}
             <TableCell>Title</TableCell>
             <TableCell>Artist</TableCell>
             <TableCell>Album</TableCell>

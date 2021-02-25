@@ -15,7 +15,7 @@ const Row = ({ id, title, artist, album }: Track) => (
 );
 
 const RecommendationsTable = ({ tracks }: { tracks: Track[] }) => (
-  <TrackTable tracks={tracks} rowComponent={Row} />
+  <TrackTable tracks={tracks} rowComponent={Row} includeEmptyCol={false} />
 );
 
 export default RecommendationsTable;
