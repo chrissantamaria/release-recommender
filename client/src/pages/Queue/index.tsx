@@ -55,7 +55,7 @@ const Queue = () => {
               underline="none"
             >
               <Button variant="contained" color="primary">
-                make it a playlist ;)
+                make it a playlist!
               </Button>
             </Link>
             <Button variant="contained" color="primary" onClick={clearQueue}>
