@@ -2,8 +2,8 @@ import axios from 'axios';
 import useStore from '../store';
 
 export const fetchFromSpotify = async (path: string) => {
-  const { accessToken, checkAccessToken } = useStore.getState();
-  await checkAccessToken();
+  const { getFreshAccessToken } = useStore.getState();
+  const accessToken = await getFreshAccessToken();
 
   const { data } = await axios.get(path, {
     headers: {

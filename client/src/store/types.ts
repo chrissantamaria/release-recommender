@@ -14,7 +14,7 @@ type Credentials = {
 export type State = Credentials & {
   queue: Track[];
   handlePostLogin: (params: URLSearchParams) => void;
-  checkAccessToken: () => Promise<void>;
+  getFreshAccessToken: () => Promise<string>;
   logout: () => void;
   addToQueue: (param: Track | Track[]) => void;
   removeFromQueue: (track: Track) => void;

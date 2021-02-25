@@ -32,26 +32,30 @@ const useStore = createStore<State>(
           );
         }),
       logout: () => set(() => INITIAL_STATE),
-      checkAccessToken: async () => {
-        const { refreshToken, expiresAt } = get();
+      getFreshAccessToken: async () => {
+        const { accessToken, refreshToken, expiresAt } = get();
         if (!expiresAt) {
           throw new Error('No expiresAt value set');
         }
 
-        if (isPast(new Date(expiresAt))) {
-          if (!refreshToken) {
-            throw new Error('No refreshToken value set');
-          }
-
-          const { data } = await axios.get(
-            `/api/spotify_refresh?refreshToken=${refreshToken}`
-          );
-
-          set((draft) => {
-            draft.accessToken = data.access_token;
-            draft.expiresAt = parseExpiresIn(data.expires_in);
-          });
+        if (!isPast(new Date(expiresAt))) {
+          return accessToken;
         }
+
+        if (!refreshToken) {
+          throw new Error('No refreshToken value set');
+        }
+
+        const { data } = await axios.get(
+          `/api/spotify_refresh?refreshToken=${refreshToken}`
+        );
+
+        set((draft) => {
+          draft.accessToken = data.access_token;
+          draft.expiresAt = parseExpiresIn(data.expires_in);
+        });
+
+        return data.access_token;
       },
       addToQueue: (param) =>
         set((draft) => {
