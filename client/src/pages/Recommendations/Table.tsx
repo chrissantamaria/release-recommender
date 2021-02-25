@@ -1,41 +1,21 @@
 import React from 'react';
-import {
-  Paper,
-  Table as MuiTable,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableCell,
-} from '@material-ui/core';
+import { TableRow, TableCell } from '@material-ui/core';
 
+import TrackTable from '../../components/TrackTable';
 import { Track } from '../../store';
 
-const Table = ({ tracks }: { tracks: Track[] }) => {
-  return (
-    <TableContainer component={Paper}>
-      <MuiTable>
-        <TableHead>
-          <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell>Artist</TableCell>
-            <TableCell>Album</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {tracks.map(({ id, title, artist, album }) => (
-            <TableRow key={id}>
-              <TableCell component="th" scope="row">
-                {title}
-              </TableCell>
-              <TableCell>{artist}</TableCell>
-              <TableCell>{album}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </MuiTable>
-    </TableContainer>
-  );
-};
+const Row = ({ id, title, artist, album }: Track) => (
+  <TableRow key={id}>
+    <TableCell component="th" scope="row">
+      {title}
+    </TableCell>
+    <TableCell>{artist}</TableCell>
+    <TableCell>{album}</TableCell>
+  </TableRow>
+);
 
-export default Table;
+const RecommendationsTable = ({ tracks }: { tracks: Track[] }) => (
+  <TrackTable tracks={tracks} rowComponent={Row} />
+);
+
+export default RecommendationsTable;
