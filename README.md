@@ -1,5 +1,13 @@
 # Release Recommender
 
+Use machine learning to find your new favorite tracks 🎵
+
+Some project highlights:
+
+- React + [Vite](https://github.com/vitejs/vite) + [Zustand](https://github.com/pmndrs/zustand) for the client
+- Docker + [Flask](https://github.com/pallets/flask) for the API
+- Deployed to Firebase with [Hosting](https://firebase.google.com/docs/hosting) + [Cloud Run](https://firebase.google.com/docs/hosting/cloud-run)
+
 ## Development Usage
 
 Go to the `api` folder and create a new `.env` file based on `.env.example` with values filled.
@@ -47,5 +55,3 @@ cd client
 yarn build
 firebase deploy
 ```
-
-The project should now be accessible at https://release-recommender.web.app.
