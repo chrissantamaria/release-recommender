@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
 import { ReactQueryCacheProvider, QueryCache } from 'react-query';
 
@@ -18,7 +17,7 @@ const App = () => {
   // Used to warm up serverless API since a Spotify auth request
   // will likely come soon after app entry
   useEffect(() => {
-    axios.get('/api/healthcheck');
+    fetch('/api/healthcheck');
   });
 
   return (

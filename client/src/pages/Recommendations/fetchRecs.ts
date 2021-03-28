@@ -1,4 +1,3 @@
-import axios from 'axios';
 import fetchFromSpotify from '../../utils/fetchFromSpotify';
 
 type TracksResponse = {
@@ -15,7 +14,13 @@ type TracksResponse = {
 };
 
 const fetchRecs = async (trackIds: string[]) => {
-  const { data: recIds } = await axios.post('/api/predict', trackIds);
+  const recIds = await fetch('/api/predict', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(trackIds),
+  }).then((res) => res.json());
 
   const rawTracks = (await fetchFromSpotify(
     `https://api.spotify.com/v1/tracks?ids=${recIds.join(',')}`
