@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
+import invariant from 'tiny-invariant';
 import { CssBaseline } from '@material-ui/core';
 import {
   createMuiTheme,
@@ -14,11 +15,13 @@ type ColorScheme = {
   toggleColorScheme: () => void;
 };
 
-const ColorSchemeContext = createContext<ColorScheme>({
-  isDarkMode: false,
-  toggleColorScheme: () => {},
-});
-export const useColorScheme = () => useContext(ColorSchemeContext);
+const ColorSchemeContext = createContext<null | ColorScheme>(null);
+
+export const useColorScheme = () => {
+  const context = useContext(ColorSchemeContext);
+  invariant(context, 'useColorScheme must be used within a ColorSchemeContext');
+  return context;
+};
 
 type Props = {
   children: React.ReactNode;
