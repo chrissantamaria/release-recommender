@@ -3,8 +3,18 @@ import createStore from 'zustand';
 import { persist } from 'zustand/middleware';
 import { addSeconds, isPast } from 'date-fns';
 import { uniqBy } from 'ramda';
+import invariant from 'tiny-invariant';
+import createValidator, { registerType } from 'typecheck.macro';
 
 import { State } from './types';
+
+type RefreshTokenResponse = {
+  access_token: string;
+  expires_in: number;
+};
+
+registerType('RefreshTokenResponse');
+const validateRefreshTokenResponse = createValidator<RefreshTokenResponse>();
 
 const parseExpiresIn = (expiresIn: number) =>
   addSeconds(new Date(), expiresIn).toISOString();
@@ -36,7 +46,7 @@ const useStore = createStore<State>(
           throw new Error('No expiresAt value set');
         }
 
-        if (!isPast(new Date(expiresAt))) {
+        if (accessToken && !isPast(new Date(expiresAt))) {
           return accessToken;
         }
 
@@ -44,10 +54,14 @@ const useStore = createStore<State>(
           throw new Error('No refreshToken value set');
         }
 
-        // TODO: add better typing (response validator?)
-        const data: any = await fetch(
+        const data = await fetch(
           `/api/spotify_refresh?refreshToken=${refreshToken}`
         ).then((res) => res.json());
+
+        invariant(
+          validateRefreshTokenResponse(data),
+          '/api/spotify_refresh response did not match schema'
+        );
 
         set((draft) => {
           draft.accessToken = data.access_token;
