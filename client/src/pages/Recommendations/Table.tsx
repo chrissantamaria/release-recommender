@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableRow, TableCell } from '@material-ui/core';
+import { TableCell, TableRow } from '@material-ui/core';
 
 import TrackTable from '@components/TrackTable';
 import { Track } from '@store';

@@ -4,17 +4,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
   Button,
-  IconButton,
   Grid,
+  IconButton,
   Link,
   Toolbar,
   Typography,
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import {
-  WbSunny as SunIcon,
   Brightness2 as MoonIcon,
   QueueMusic as QueueIcon,
+  WbSunny as SunIcon,
 } from '@material-ui/icons';
 
 import useStore from '@store';

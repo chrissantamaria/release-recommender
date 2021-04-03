@@ -10,7 +10,8 @@
       "version": "detect"
     }
   },
-  "rules": { 
-    "@typescript-eslint/explicit-module-boundary-types": ["off"]
+  "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": ["off"],
+    "sort-imports": ["warn", { "ignoreDeclarationSort": true }]
   }
 }

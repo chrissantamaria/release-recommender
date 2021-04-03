@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton, TableRow, TableCell } from '@material-ui/core';
+import { IconButton, TableCell, TableRow } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 
 import TrackTable from '@components/TrackTable';

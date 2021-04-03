@@ -2,9 +2,9 @@ import React, { createContext, useContext, useMemo, useState } from 'react';
 import invariant from 'tiny-invariant';
 import { CssBaseline } from '@material-ui/core';
 import {
+  ThemeProvider as MuiThemeProvider,
   createMuiTheme,
   responsiveFontSizes,
-  ThemeProvider as MuiThemeProvider,
 } from '@material-ui/core/styles';
 
 import './globals.css';

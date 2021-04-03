@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  Paper,
   Table as MuiTable,
+  Paper,
   TableBody,
+  TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  TableCell,
 } from '@material-ui/core';
 
 import type { Track } from '@store';

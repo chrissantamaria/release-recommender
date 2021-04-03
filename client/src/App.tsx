@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { QueryClientProvider, QueryClient } from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Routes from './Routes';
 import ThemeProvider from '@utils/ThemeProvider';
