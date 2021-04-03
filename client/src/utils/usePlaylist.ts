@@ -48,12 +48,12 @@ const usePlaylist = (id: string) =>
       tracks: data.tracks.items
         // Some playlists items with empty track data, filtering those out
         .filter((item) => item.track)
-        .map((item) => ({
-          id: item.track.id,
-          title: parseEntities(item.track.name),
+        .map(({ track }) => ({
+          id: track.id,
+          title: parseEntities(track.name),
           // TODO: handle multiple artists
-          artist: parseEntities(item.track.artists[0].name),
-          album: parseEntities(item.track.album.name),
+          artist: parseEntities(track.artists[0].name),
+          album: parseEntities(track.album.name),
         })),
     };
   });
