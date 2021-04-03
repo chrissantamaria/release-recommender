@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { decode } from 'he';
+import { parseEntities } from 'parse-entities';
 import invariant from 'tiny-invariant';
 import createValidator, { registerType } from 'typecheck.macro';
 
@@ -42,18 +42,18 @@ const usePlaylist = (id: string) =>
     );
 
     return {
-      title: decode(data.name),
-      description: decode(data.description),
+      title: parseEntities(data.name),
+      description: parseEntities(data.description),
       image: data.images?.[0]?.url,
       tracks: data.tracks.items
         // Some playlists items with empty track data, filtering those out
         .filter((item) => item.track)
         .map((item) => ({
           id: item.track.id,
-          title: decode(item.track.name),
+          title: parseEntities(item.track.name),
           // TODO: handle multiple artists
-          artist: decode(item.track.artists[0].name),
-          album: decode(item.track.album.name),
+          artist: parseEntities(item.track.artists[0].name),
+          album: parseEntities(item.track.album.name),
         })),
     };
   });

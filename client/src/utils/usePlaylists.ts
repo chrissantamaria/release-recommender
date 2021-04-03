@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { decode } from 'he';
+import { parseEntities } from 'parse-entities';
 import invariant from 'tiny-invariant';
 import createValidator, { registerType } from 'typecheck.macro';
 
@@ -44,7 +44,7 @@ const usePlaylists = () =>
     const data = await fetchRawPlaylists();
     return data.map((item) => ({
       id: item.id,
-      title: decode(item.name),
+      title: parseEntities(item.name),
       image: item.images?.[0]?.url,
       numTracks: item.tracks.total,
     }));
