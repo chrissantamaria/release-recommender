@@ -1,4 +1,4 @@
-import useStore from '../store';
+import useStore from '@store';
 
 export const fetchFromSpotify = async (path: string) => {
   const { getFreshAccessToken } = useStore.getState();

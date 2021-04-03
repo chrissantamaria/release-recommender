@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ReactQueryCacheProvider, QueryCache } from 'react-query';
 
 import Routes from './Routes';
-import ThemeProvider from './utils/ThemeProvider';
+import ThemeProvider from '@utils/ThemeProvider';
 
 const queryCache = new QueryCache({
   defaultConfig: {

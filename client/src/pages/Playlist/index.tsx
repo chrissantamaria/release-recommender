@@ -4,10 +4,10 @@ import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AspectRatio from 'react-aspect-ratio';
 
-import usePlaylist from '../../utils/usePlaylist';
-import useStore from '../../store';
+import usePlaylist from '@utils/usePlaylist';
+import useStore from '@store';
 
-import placeholderImage from '../../images/album-placeholder.png';
+import placeholderImage from '@images/album-placeholder.png';
 import Table from './Table';
 
 const useStyles = makeStyles({

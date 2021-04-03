@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link, Typography } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 
-import placeholderImage from '../../images/album-placeholder.png';
+import placeholderImage from '@images/album-placeholder.png';
 
 const useStyles = makeStyles({
   container: {

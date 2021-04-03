@@ -3,8 +3,8 @@ import { IconButton, TableRow, TableCell } from '@material-ui/core';
 import { Add as AddIcon, Check as CheckIcon } from '@material-ui/icons';
 import find from 'lodash/find';
 
-import TrackTable from '../../components/TrackTable';
-import useStore, { Track } from '../../store';
+import TrackTable from '@components/TrackTable';
+import useStore, { Track } from '@store';
 
 const Row = (track: Track) => {
   const { id, title, artist, album } = track;

@@ -9,7 +9,7 @@ import {
   TableCell,
 } from '@material-ui/core';
 
-import type { Track } from '../store';
+import type { Track } from '@store';
 
 type Props = {
   tracks: Track[];

@@ -17,8 +17,8 @@ import {
   QueueMusic as QueueIcon,
 } from '@material-ui/icons';
 
-import useStore from '../store';
-import { useColorScheme } from '../utils/ThemeProvider';
+import useStore from '@store';
+import { useColorScheme } from '@utils/ThemeProvider';
 
 const useStyles = makeStyles({
   container: {
