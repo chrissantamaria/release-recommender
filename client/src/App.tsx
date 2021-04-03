@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { ReactQueryCacheProvider, QueryCache } from 'react-query';
+import { QueryClientProvider, QueryClient } from 'react-query';
 
 import Routes from './Routes';
 import ThemeProvider from '@utils/ThemeProvider';
 
-const queryCache = new QueryCache({
-  defaultConfig: {
+const queryClient = new QueryClient({
+  defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
     },
@@ -21,13 +21,13 @@ const App = () => {
   });
 
   return (
-    <ReactQueryCacheProvider queryCache={queryCache}>
+    <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <BrowserRouter>
           <Routes />
         </BrowserRouter>
       </ThemeProvider>
-    </ReactQueryCacheProvider>
+    </QueryClientProvider>
   );
 };
 
