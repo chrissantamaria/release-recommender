@@ -25,8 +25,8 @@ To run the client in dev mode (accessible from http://localhost:3000):
 cd client
 # install dependencies
 yarn
-# start the server
-yarn start
+# start the dev server
+yarn dev
 ```
 
 ## Deployment
