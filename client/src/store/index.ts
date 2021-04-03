@@ -2,8 +2,7 @@ import withImmer from './utils/withImmer';
 import createStore from 'zustand';
 import { persist } from 'zustand/middleware';
 import { addSeconds, isPast } from 'date-fns';
-import unionBy from 'lodash/unionBy';
-import { original } from 'immer';
+import { uniqBy } from 'ramda';
 
 import { State } from './types';
 
@@ -60,7 +59,8 @@ const useStore = createStore<State>(
       addToQueue: (param) =>
         set((draft) => {
           const tracks = Array.isArray(param) ? param : [param];
-          draft.queue = unionBy(original(draft.queue), tracks, 'id');
+          // TODO: can be replaced by custom lighterweight fn
+          draft.queue = uniqBy((item) => item.id, [...draft.queue, ...tracks]);
         }),
       removeFromQueue: ({ id }) =>
         set((draft) => {
