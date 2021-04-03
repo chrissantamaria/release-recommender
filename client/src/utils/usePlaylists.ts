@@ -18,7 +18,7 @@ type Item = {
 
 type PlaylistsResponse = {
   items: Item[];
-  next?: string;
+  next: string | null;
 };
 
 registerType('PlaylistsResponse');
