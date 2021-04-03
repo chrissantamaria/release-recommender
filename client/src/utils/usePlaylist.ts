@@ -13,7 +13,6 @@ type PlaylistResponse = {
   }[];
   tracks: {
     items: {
-      type: string;
       track: {
         id: string;
         name: string;
