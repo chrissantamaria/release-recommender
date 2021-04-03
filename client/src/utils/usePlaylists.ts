@@ -1,5 +1,8 @@
 import { useQuery } from 'react-query';
 import { decode } from 'he';
+import invariant from 'tiny-invariant';
+import createValidator, { registerType } from 'typecheck.macro';
+
 import fetchFromSpotify from './fetchFromSpotify';
 
 type Item = {
@@ -18,11 +21,21 @@ type PlaylistsResponse = {
   next?: string;
 };
 
+registerType('PlaylistsResponse');
+const validatePlaylistsResponse = createValidator<PlaylistsResponse>();
+
 // Recursively paging through playlist requests
 const fetchRawPlaylists = async (
   path: string = 'https://api.spotify.com/v1/me/playlists'
 ): Promise<Item[]> => {
-  const { next, items } = (await fetchFromSpotify(path)) as PlaylistsResponse;
+  const data = await fetchFromSpotify(path);
+
+  invariant(
+    validatePlaylistsResponse(data),
+    'https://api.spotify.com/v1/me/playlists response did not match schema'
+  );
+
+  const { next, items } = data;
   return !next ? items : [...items, ...(await fetchRawPlaylists(next))];
 };
 

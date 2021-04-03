@@ -1,4 +1,12 @@
+import invariant from 'tiny-invariant';
+import createValidator, { registerType } from 'typecheck.macro';
+
 import fetchFromSpotify from '@utils/fetchFromSpotify';
+
+type PredictResponse = string[];
+
+registerType('PredictResponse');
+const validatePredictResponse = createValidator<PredictResponse>();
 
 type TracksResponse = {
   tracks: {
@@ -13,6 +21,9 @@ type TracksResponse = {
   }[];
 };
 
+registerType('TracksResponse');
+const validateTracksResponse = createValidator<TracksResponse>();
+
 const fetchRecs = async (trackIds: string[]) => {
   const recIds = await fetch('/api/predict', {
     method: 'POST',
@@ -22,9 +33,19 @@ const fetchRecs = async (trackIds: string[]) => {
     body: JSON.stringify(trackIds),
   }).then((res) => res.json());
 
-  const rawTracks = (await fetchFromSpotify(
+  invariant(
+    validatePredictResponse(recIds),
+    '/api/predict response did not match schema'
+  );
+
+  const rawTracks = await fetchFromSpotify(
     `https://api.spotify.com/v1/tracks?ids=${recIds.join(',')}`
-  )) as TracksResponse;
+  );
+
+  invariant(
+    validateTracksResponse(rawTracks),
+    'https://api.spotify.com/v1/tracks response did not match schema'
+  );
 
   return rawTracks.tracks.map((track) => ({
     id: track.id,

@@ -1,5 +1,8 @@
 import { useQuery } from 'react-query';
 import { decode } from 'he';
+import invariant from 'tiny-invariant';
+import createValidator, { registerType } from 'typecheck.macro';
+
 import fetchFromSpotify from './fetchFromSpotify';
 
 type PlaylistResponse = {
@@ -25,11 +28,19 @@ type PlaylistResponse = {
   };
 };
 
+registerType('PlaylistResponse');
+const validatePlaylistResponse = createValidator<PlaylistResponse>();
+
 const usePlaylist = (id: string) =>
   useQuery(['playlist', id], async () => {
-    const data = (await fetchFromSpotify(
+    const data = await fetchFromSpotify(
       `https://api.spotify.com/v1/playlists/${id}`
-    )) as PlaylistResponse;
+    );
+
+    invariant(
+      validatePlaylistResponse(data),
+      'https://api.spotify.com/v1/playlists response did not match schema'
+    );
 
     return {
       title: decode(data.name),

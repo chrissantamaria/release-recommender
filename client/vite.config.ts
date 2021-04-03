@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import macrosPlugin from 'vite-plugin-babel-macros';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import { getAliases } from 'vite-aliases'
 import { minifyHtml } from 'vite-plugin-html';
@@ -14,6 +15,7 @@ export default defineConfig({
       // http://perfectionkills.com/experimenting-with-html-minifier/#remove_attribute_quotes
       removeAttributeQuotes: false,
     }),
+    macrosPlugin(),
   ],
   server: {
     proxy: {
