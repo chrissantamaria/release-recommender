@@ -1,5 +1,8 @@
 import { useQuery } from 'react-query';
-import { decode } from 'he';
+import { parseEntities } from 'parse-entities';
+import invariant from 'tiny-invariant';
+import createValidator, { registerType } from 'typecheck.macro';
+
 import fetchFromSpotify from './fetchFromSpotify';
 
 type PlaylistResponse = {
@@ -10,7 +13,6 @@ type PlaylistResponse = {
   }[];
   tracks: {
     items: {
-      type: string;
       track: {
         id: string;
         name: string;
@@ -25,25 +27,33 @@ type PlaylistResponse = {
   };
 };
 
+registerType('PlaylistResponse');
+const validatePlaylistResponse = createValidator<PlaylistResponse>();
+
 const usePlaylist = (id: string) =>
   useQuery(['playlist', id], async () => {
-    const data = (await fetchFromSpotify(
+    const data = await fetchFromSpotify(
       `https://api.spotify.com/v1/playlists/${id}`
-    )) as PlaylistResponse;
+    );
+
+    invariant(
+      validatePlaylistResponse(data),
+      'https://api.spotify.com/v1/playlists response did not match schema'
+    );
 
     return {
-      title: decode(data.name),
-      description: decode(data.description),
+      title: parseEntities(data.name),
+      description: parseEntities(data.description),
       image: data.images?.[0]?.url,
       tracks: data.tracks.items
         // Some playlists items with empty track data, filtering those out
         .filter((item) => item.track)
-        .map((item) => ({
-          id: item.track.id,
-          title: decode(item.track.name),
+        .map(({ track }) => ({
+          id: track.id,
+          title: parseEntities(track.name),
           // TODO: handle multiple artists
-          artist: decode(item.track.artists[0].name),
-          album: decode(item.track.album.name),
+          artist: parseEntities(track.artists[0].name),
+          album: parseEntities(track.album.name),
         })),
     };
   });

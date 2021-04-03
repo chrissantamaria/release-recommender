@@ -1,8 +1,8 @@
 import React from 'react';
 import { TableRow, TableCell } from '@material-ui/core';
 
-import TrackTable from '../../components/TrackTable';
-import { Track } from '../../store';
+import TrackTable from '@components/TrackTable';
+import { Track } from '@store';
 
 const Row = ({ id, title, artist, album }: Track) => (
   <TableRow key={id}>

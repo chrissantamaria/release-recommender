@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import usePlaylists from '../../utils/usePlaylists';
+import usePlaylists from '@utils/usePlaylists';
 import PlaylistPreview from './PlaylistPreview';
 import { Typography } from '@material-ui/core';
 

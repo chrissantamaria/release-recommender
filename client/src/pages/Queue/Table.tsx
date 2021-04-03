@@ -2,8 +2,8 @@ import React from 'react';
 import { IconButton, TableRow, TableCell } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 
-import TrackTable from '../../components/TrackTable';
-import useStore, { Track } from '../../store';
+import TrackTable from '@components/TrackTable';
+import useStore, { Track } from '@store';
 
 const Row = (track: Track) => {
   const { title, artist, album } = track;

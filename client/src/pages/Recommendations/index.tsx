@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import useStore, { Track } from '../../store';
+import useStore, { Track } from '@store';
 import { useNavigate } from 'react-router-dom';
 
 import fetchRecs from './fetchRecs';

@@ -1,5 +1,12 @@
-import axios from 'axios';
-import fetchFromSpotify from '../../utils/fetchFromSpotify';
+import invariant from 'tiny-invariant';
+import createValidator, { registerType } from 'typecheck.macro';
+
+import fetchFromSpotify from '@utils/fetchFromSpotify';
+
+type PredictResponse = string[];
+
+registerType('PredictResponse');
+const validatePredictResponse = createValidator<PredictResponse>();
 
 type TracksResponse = {
   tracks: {
@@ -14,12 +21,31 @@ type TracksResponse = {
   }[];
 };
 
-const fetchRecs = async (trackIds: string[]) => {
-  const { data: recIds } = await axios.post('/api/predict', trackIds);
+registerType('TracksResponse');
+const validateTracksResponse = createValidator<TracksResponse>();
 
-  const rawTracks = (await fetchFromSpotify(
+const fetchRecs = async (trackIds: string[]) => {
+  const recIds = await fetch('/api/predict', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(trackIds),
+  }).then((res) => res.json());
+
+  invariant(
+    validatePredictResponse(recIds),
+    '/api/predict response did not match schema'
+  );
+
+  const rawTracks = await fetchFromSpotify(
     `https://api.spotify.com/v1/tracks?ids=${recIds.join(',')}`
-  )) as TracksResponse;
+  );
+
+  invariant(
+    validateTracksResponse(rawTracks),
+    'https://api.spotify.com/v1/tracks response did not match schema'
+  );
 
   return rawTracks.tracks.map((track) => ({
     id: track.id,

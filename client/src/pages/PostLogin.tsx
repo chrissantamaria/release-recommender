@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useStore from '../store';
+import useStore from '@store';
 
 const PostLogin = () => {
   const navigate = useNavigate();

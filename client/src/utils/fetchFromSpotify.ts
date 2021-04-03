@@ -1,16 +1,14 @@
-import axios from 'axios';
-import useStore from '../store';
+import useStore from '@store';
 
 export const fetchFromSpotify = async (path: string) => {
   const { getFreshAccessToken } = useStore.getState();
   const accessToken = await getFreshAccessToken();
 
-  const { data } = await axios.get(path, {
+  return await fetch(path, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
-  });
-  return data;
+  }).then((res) => res.json());
 };
 
 export default fetchFromSpotify;
