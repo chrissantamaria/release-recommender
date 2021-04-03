@@ -4,7 +4,7 @@ Use machine learning to find your new favorite tracks 🎵
 
 Some project highlights:
 
-- React + [Vite](https://github.com/vitejs/vite) + [Zustand](https://github.com/pmndrs/zustand) for the client
+- [Preact](https://github.com/preactjs/preact) + [Vite](https://github.com/vitejs/vite) + [Zustand](https://github.com/pmndrs/zustand) for the client
 - Docker + [Flask](https://github.com/pallets/flask) for the API
 - Deployed to Firebase with [Hosting](https://firebase.google.com/docs/hosting) + [Cloud Run](https://firebase.google.com/docs/hosting/cloud-run)
 
