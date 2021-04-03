@@ -1,13 +1,14 @@
-import { defineConfig } from 'vite';
+import type { UserConfigExport } from 'vite';
 import macrosPlugin from 'vite-plugin-babel-macros';
 import reactRefresh from '@vitejs/plugin-react-refresh';
-import { getAliases } from 'vite-aliases'
+import { getAliases } from 'vite-aliases';
 import { minifyHtml } from 'vite-plugin-html';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
-export default defineConfig({
+const config: UserConfigExport = {
   resolve: {
-    alias: getAliases()
+    alias: getAliases(),
   },
   plugins: [
     reactRefresh(),
@@ -25,4 +26,10 @@ export default defineConfig({
       },
     },
   },
-});
+};
+
+if (process.env.BUILD_STATS) {
+  config.plugins.push(visualizer());
+}
+
+export default config;
