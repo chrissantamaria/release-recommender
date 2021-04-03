@@ -35,6 +35,12 @@
     "@types/ramda": "0.27.1",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.23.1",
     "open-cli": "^6.0.1",
     "prettier": "2.2.1",
     "rollup-plugin-visualizer": "^5.3.0",
@@ -43,11 +49,6 @@
     "vite-aliases": "^0.5.1",
     "vite-plugin-babel-macros": "^1.0.5",
     "vite-plugin-html": "^2.0.3"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
   },
   "browserslist": {
     "production": [

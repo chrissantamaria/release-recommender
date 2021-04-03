@@ -29,7 +29,7 @@ const Home = () => {
           queue up!
         </Typography>
         <Typography variant="h6">
-          choose as many of your playlists as you'd like.
+          choose as many of your playlists as you&apos;d like.
         </Typography>
         <Typography variant="h6">more songs = more recommendations</Typography>
       </div>

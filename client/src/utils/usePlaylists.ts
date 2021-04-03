@@ -26,7 +26,7 @@ const validatePlaylistsResponse = createValidator<PlaylistsResponse>();
 
 // Recursively paging through playlist requests
 const fetchRawPlaylists = async (
-  path: string = 'https://api.spotify.com/v1/me/playlists'
+  path = 'https://api.spotify.com/v1/me/playlists'
 ): Promise<Item[]> => {
   const data = await fetchFromSpotify(path);
 
