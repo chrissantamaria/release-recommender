@@ -1,4 +1,3 @@
-import React from 'react';
 import { TableCell, TableRow } from '@material-ui/core';
 
 import TrackTable from '@components/TrackTable';

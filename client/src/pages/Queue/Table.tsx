@@ -1,4 +1,3 @@
-import React from 'react';
 import { IconButton, TableCell, TableRow } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 

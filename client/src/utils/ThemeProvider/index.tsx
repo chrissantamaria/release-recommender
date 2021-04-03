@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState } from 'react';
+import { ReactNode, createContext, useContext, useMemo, useState } from 'react';
 import invariant from 'tiny-invariant';
 import { CssBaseline } from '@material-ui/core';
 import {
@@ -24,7 +24,7 @@ export const useColorScheme = () => {
 };
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const ThemeProvider = ({ children }: Props) => {
