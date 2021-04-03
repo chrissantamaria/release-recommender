@@ -42,17 +42,14 @@ const useStore = createStore<State>(
       logout: () => set(() => INITIAL_STATE),
       getFreshAccessToken: async () => {
         const { accessToken, refreshToken, expiresAt } = get();
-        if (!expiresAt) {
-          throw new Error('No expiresAt value set');
-        }
+
+        invariant(expiresAt, 'No expiresAt value set');
 
         if (accessToken && !isPast(new Date(expiresAt))) {
           return accessToken;
         }
 
-        if (!refreshToken) {
-          throw new Error('No refreshToken value set');
-        }
+        invariant(refreshToken, 'No refreshToken value set');
 
         const data = await fetch(
           `/api/spotify_refresh?refreshToken=${refreshToken}`
