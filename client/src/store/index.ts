@@ -1,10 +1,10 @@
 import { addSeconds, isPast } from 'date-fns';
-import { uniqBy } from 'ramda';
 import invariant from 'tiny-invariant';
 import createValidator, { registerType } from 'typecheck.macro';
 
 import createStore from './middleware';
 import type { State } from './types';
+import { appendUniqueTracks } from './utils';
 
 type RefreshTokenResponse = {
   access_token: string;
@@ -66,8 +66,7 @@ const useStore = createStore<State>((set, get) => ({
   addToQueue: (param) =>
     set((draft) => {
       const tracks = Array.isArray(param) ? param : [param];
-      // TODO: can be replaced by custom lighterweight fn
-      draft.queue = uniqBy((item) => item.id, [...draft.queue, ...tracks]);
+      draft.queue = appendUniqueTracks(draft.queue, tracks);
     }),
   removeFromQueue: ({ id }) =>
     set((draft) => {
