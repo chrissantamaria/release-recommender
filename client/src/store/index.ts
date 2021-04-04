@@ -1,10 +1,10 @@
-import { addSeconds, isPast } from 'date-fns';
+import { isPast } from 'date-fns';
 import invariant from 'tiny-invariant';
 import createValidator, { registerType } from 'typecheck.macro';
 
 import createStore from './middleware';
 import type { State } from './types';
-import { appendUniqueTracks } from './utils';
+import { appendUniqueTracks, parseExpiresIn } from './utils';
 
 type RefreshTokenResponse = {
   access_token: string;
@@ -13,9 +13,6 @@ type RefreshTokenResponse = {
 
 registerType('RefreshTokenResponse');
 const validateRefreshTokenResponse = createValidator<RefreshTokenResponse>();
-
-const parseExpiresIn = (expiresIn: number) =>
-  addSeconds(new Date(), expiresIn).toISOString();
 
 const INITIAL_STATE = {
   accessToken: null,

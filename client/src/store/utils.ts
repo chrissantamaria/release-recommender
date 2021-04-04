@@ -1,4 +1,9 @@
+import { addSeconds } from 'date-fns';
+
 import type { Track } from './types';
+
+export const parseExpiresIn = (expiresIn: number) =>
+  addSeconds(new Date(), expiresIn).toISOString();
 
 export const appendUniqueTracks = (
   existingTracks: Track[],
