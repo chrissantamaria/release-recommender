@@ -3153,15 +3153,14 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vite-aliases@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/vite-aliases/-/vite-aliases-0.5.1.tgz#a4049ced528936ab14b22f148855656bfa9f465b"
-  integrity sha512-GRgyM+wgsEx4hoI54aENhfTjF1NaxYHSToYYFcNI1dZnFhT43j5yo2rDEjRmd6EFsHGWcvbvf47x14eRJV8bXg==
+vite-aliases@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/vite-aliases/-/vite-aliases-0.6.2.tgz#02dde84d610d342dc5b33197d3c92eb08a1e811c"
+  integrity sha512-H7+bz2zzsd/nfE/OdBgcNx2MhcQn14iDteZFB1IAE49f2hqGGewRNXncQibYNzIbT1721o30vpEZ3YiIqtfTiw==
   dependencies:
     chalk "^4.1.0"
     chokidar "^3.5.1"
-    slash "^3.0.0"
-    vite "^2.0.0-beta.70"
+    vite "^2.1.5"
 
 vite-plugin-babel-macros@^1.0.5:
   version "1.0.5"
@@ -3184,10 +3183,22 @@ vite-plugin-html@^2.0.3:
     fs-extra "^9.1.0"
     html-minifier-terser "^5.1.1"
 
-vite@^2.0.0-beta.70, vite@^2.1.5:
+vite@^2.1.5:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/vite/-/vite-2.1.5.tgz#4857da441c62f7982c83cbd5f42a00330f20c9c1"
   integrity sha512-tYU5iaYeUgQYvK/CNNz3tiJ8vYqPWfCE9IQ7K0iuzYovWw7lzty7KRYGWwV3CQPh0NKxWjOczAqiJsCL0Xb+Og==
+  dependencies:
+    esbuild "^0.9.3"
+    postcss "^8.2.1"
+    resolve "^1.19.0"
+    rollup "^2.38.5"
+  optionalDependencies:
+    fsevents "~2.3.1"
+
+vite@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.2.3.tgz#1acbdfa56ac00e00e7ccb6988f63f130c2f99dbb"
+  integrity sha512-PtjyBL4GtACM+uT5q5hi2+AlMBbb6YI2b2bam6QI8ZdZt4FezseF0yZHQx0G+b3po9jIJ/GS5N9gc5Yq9Rue7g==
   dependencies:
     esbuild "^0.9.3"
     postcss "^8.2.1"
